@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+Delivery Management | YPTSC IMS
+{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h2>
+        {{ transaction_data.title }}
+    </h2>
+    <p>
+        Manage delivery schedules and status.
+    </p>
+</section>
+<section class="content-card">
+    <h3>
+        Delivery List
+    </h3>
+    <table class="data-table">
+        <tbody>
+            <tr>
+                <td>
+                    No delivery records yet.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock %}

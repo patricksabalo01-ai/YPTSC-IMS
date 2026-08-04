@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}
+Repair Center | YPTSC IMS
+{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h2>
+        {{ transaction_data.title }}
+    </h2>
+    <p>
+        Monitor repair requests and service history.
+    </p>
+</section>
+<section class="content-card">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>
+                    Asset
+                </th>
+                <th>
+                    Issue
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    No repair records yet.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock %}

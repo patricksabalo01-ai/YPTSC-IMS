@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block title %} Print QR | YPTSC IMS {% endblock %}
+{% block css %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/inventory.css') }}"
+/>
+
+{% endblock %} {% block content %}
+
+<section class="qr-print-page">
+  <div class="qr-label">
+    <h3>YPTSC IMS</h3>
+
+    <img
+      src="{{ url_for('static', filename=unit.qr_code) }}"
+      class="qr-preview"
+    />
+
+    <div class="qr-info">
+      <h4>{{ unit.asset_code }}</h4>
+
+      <p>
+        <strong> {{ unit.brand }} </strong>
+
+        {{ unit.model }}
+      </p>
+
+      <p>Serial: {{ unit.serial_number }}</p>
+
+      <p>Category: {{ unit.unit_category }}</p>
+    </div>
+  </div>
+
+  <button onclick="window.print()" class="btn-primary">
+    <i class="fa-solid fa-print"></i>
+
+    Print QR
+  </button>
+</section>
+
+{% endblock %}

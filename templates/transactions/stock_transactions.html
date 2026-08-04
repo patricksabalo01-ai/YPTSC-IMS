@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}
+Stock Transactions | YPTSC IMS
+{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h2>
+        {{ transaction_data.title }}
+    </h2>
+    <p>
+        Track inventory movement history.
+    </p>
+</section>
+<section class="content-card">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>
+                    Transaction ID
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Item
+                </th>
+                <th>
+                    Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4">
+                    No transactions available.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock %}

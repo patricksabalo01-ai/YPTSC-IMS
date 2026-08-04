@@ -1,0 +1,705 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Deployment | YPTSC IMS
+
+{% endblock %}
+
+
+{% block css %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for(
+    'static',
+    filename='css/deployment.css'
+  ) }}"
+/>
+
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ==================================
+     PAGE HEADER
+================================== -->
+
+<section class="page-header">
+
+  <div class="page-header-content">
+
+    <h2>
+
+      Unit Deployment
+
+    </h2>
+
+    <p>
+
+      Search for an available unit and
+      complete its deployment information.
+
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================
+     UNIT SEARCH
+================================== -->
+
+<section class="deployment-search-card">
+
+  <div class="search-header">
+
+  <div class="unit-search-section">
+
+  <label for="unitSearch">
+    Search Available Unit
+  </label>
+
+  <div class="search-input-wrapper">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+      type="text"
+      id="unitSearch"
+      placeholder="Search by asset code, brand, model, or serial number..."
+      autocomplete="off"
+    />
+
+  </div>
+
+  <!-- SEARCH RESULTS -->
+  <!-- Hidden when the page first loads -->
+
+  <div
+    id="unitSearchResults"
+    class="unit-search-results"
+    hidden
+  >
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- ==================================
+     SELECTED UNIT
+================================== -->
+
+<!-- ==================================
+     SELECTED UNIT
+================================== -->
+
+<section
+  id="selectedUnitCard"
+  class="selected-unit-card"
+  hidden
+>
+
+  <div class="selected-unit-header">
+
+    <div>
+
+      <h3>
+        Selected Unit
+      </h3>
+
+      <p>
+        Review the selected unit before creating a deployment.
+      </p>
+
+    </div>
+
+    <button
+      type="button"
+      id="clearSelectedUnit"
+      class="btn-primary"
+    >
+
+      <i class="fa-solid fa-xmark"></i>
+
+      Remove
+
+    </button>
+
+  </div>
+
+
+  <div class="selected-unit-grid">
+
+    <div>
+
+      <span>Asset Code</span>
+
+      <strong id="selectedAssetCode">
+        -
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span>Brand</span>
+
+      <strong id="selectedBrand">
+        -
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span>Model</span>
+
+      <strong id="selectedModel">
+        -
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span>Serial Number</span>
+
+      <strong id="selectedSerialNumber">
+        -
+      </strong>
+
+    </div>
+
+
+    <div>
+
+      <span>Availability</span>
+
+      <strong id="selectedAvailability">
+        -
+      </strong>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================
+     DEPLOYMENT FORM
+================================== -->
+
+<form
+
+  method="POST"
+
+  action="{{ url_for(
+    'deployment.deployment'
+  ) }}"
+
+  id="deploymentForm"
+
+  class="deployment-form"
+
+>
+
+
+  <!-- SELECTED UNIT ID -->
+
+  <input
+
+    type="hidden"
+
+    id="unitId"
+
+    name="unit_id"
+
+  />
+
+
+  <section class="content-card">
+
+
+    <!-- FORM HEADER -->
+
+    <div class="deployment-section-header">
+
+      <div>
+
+        <h3>
+
+          Deployment Information
+
+        </h3>
+
+        <p>
+
+          Fill in the deployment details
+          for the selected unit.
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- FORM FIELDS -->
+
+    <div class="form-grid">
+
+
+      <!-- COMPANY NAME -->
+
+      <div class="form-group">
+
+        <label for="company_name">
+
+          Company Name
+
+          <span class="required">
+
+            *
+
+          </span>
+
+        </label>
+
+
+        <input
+
+          type="text"
+
+          id="company_name"
+
+          name="company_name"
+
+          placeholder="Enter company name"
+
+          required
+
+        />
+
+      </div>
+
+
+      <!-- SALES AGENT -->
+
+      <div class="form-group">
+
+        <label for="sales_agent">
+
+          Sales Agent
+
+        </label>
+
+
+        <input
+
+          type="text"
+
+          id="sales_agent"
+
+          name="sales_agent"
+
+          placeholder="Enter sales agent name"
+
+        />
+
+      </div>
+
+
+      <!-- CONTRACT START -->
+
+      <div class="form-group">
+
+        <label for="contract_start">
+
+          Contract Start
+
+        </label>
+
+
+        <input
+
+          type="date"
+
+          id="contract_start"
+
+          name="contract_start"
+
+        />
+
+      </div>
+
+
+      <!-- CONTRACT END -->
+
+      <div class="form-group">
+
+        <label for="contract_end">
+
+          Contract End
+
+        </label>
+
+
+        <input
+
+          type="date"
+
+          id="contract_end"
+
+          name="contract_end"
+
+        />
+
+      </div>
+
+
+      <!-- MONTHLY RATE -->
+
+   
+
+       <div class="form-group">
+
+  <label for="monthly_rate">
+    Monthly Rate
+  </label>
+
+  <div class="currency-input">
+
+    <span class="currency-symbol">
+      ₱
+    </span>
+
+    <input
+      type="number"
+      id="monthly_rate"
+      name="monthly_rate"
+      placeholder="0.00"
+      min="0"
+      step="0.01"
+    />
+
+  </div>
+
+</div>
+
+
+
+      <!-- DEPARTMENT -->
+
+      <div class="form-group">
+
+        <label for="department">
+
+          Department
+
+        </label>
+
+
+        <input
+
+          type="text"
+
+          id="department"
+
+          name="department"
+
+          placeholder="Enter department"
+
+        />
+
+      </div>
+
+
+      <!-- LOCATION -->
+
+      <div class="form-group">
+
+        <label for="location">
+
+          Location
+
+        </label>
+
+
+        <input
+
+          type="text"
+
+          id="location"
+
+          name="location"
+
+          placeholder="Enter location"
+
+        />
+
+      </div>
+
+
+      <!-- DEPLOYMENT DATE -->
+
+      <div class="form-group">
+
+        <label for="deployment_date">
+
+          Deployment Date
+
+        </label>
+
+
+        <input
+
+          type="date"
+
+          id="deployment_date"
+
+          name="deployment_date"
+
+        />
+
+      </div>
+
+
+      <!-- TRANSACTION TYPE -->
+
+      <div class="form-group">
+
+        <label for="transaction_type">
+
+          Transaction Type
+
+        </label>
+
+
+        <select
+
+          id="transaction_type"
+
+          name="transaction_type"
+
+        >
+
+          <option value="">
+
+            Select transaction type
+
+          </option>
+
+
+          <option value="Rental">
+
+            Rental
+
+          </option>
+
+
+          <option value="Lease">
+
+            Lease
+
+          </option>
+
+
+          <option value="Service">
+
+            Service
+
+          </option>
+
+
+          <option value="Other">
+
+            Other
+
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- TECHNICIAN -->
+
+      <div class="form-group">
+
+        <label for="technician">
+
+          Technician
+
+        </label>
+
+
+        <input
+
+          type="text"
+
+          id="technician"
+
+          name="technician"
+
+          placeholder="Enter technician name"
+
+        />
+
+      </div>
+
+
+      <!-- BLACK METER -->
+
+      <div class="form-group">
+
+        <label for="black_meter">
+
+          Black Meter
+
+        </label>
+
+
+        <input
+
+          type="number"
+
+          id="black_meter"
+
+          name="black_meter"
+
+          value="0"
+
+          min="0"
+
+        />
+
+      </div>
+
+
+      <!-- COLOR METER -->
+
+      <div class="form-group">
+
+        <label for="color_meter">
+
+          Color Meter
+
+        </label>
+
+
+        <input
+
+          type="number"
+
+          id="color_meter"
+
+          name="color_meter"
+
+          value="0"
+
+          min="0"
+
+        />
+
+      </div>
+
+
+      <!-- REMARKS -->
+
+      <div class="form-group full-width">
+
+        <label for="remarks">
+
+          Remarks
+
+        </label>
+
+
+        <textarea
+
+          id="remarks"
+
+          name="remarks"
+
+          rows="5"
+
+          placeholder="Enter additional deployment information..."
+
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <!-- FORM ACTIONS -->
+
+    <div class="form-actions">
+
+
+      <button
+
+        type="reset"
+
+        class="btn-primary"
+
+      >
+
+        <i
+          class="fa-solid fa-rotate-left"
+        ></i>
+
+        Clear Form
+
+      </button>
+
+
+      <button
+
+        type="submit"
+
+        class="btn-primary"
+
+      >
+
+        <i
+          class="fa-solid fa-truck"
+        ></i>
+
+        Save Deployment
+
+      </button>
+
+    </div>
+
+  </section>
+
+</form>
+
+{% endblock %}
+
+
+{% block javascript %}
+
+<script
+
+  src="{{ url_for(
+    'static',
+    filename='js/deployment.js'
+  ) }}"
+
+  defer
+
+></script>
+
+{% endblock %}

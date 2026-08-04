@@ -1,0 +1,460 @@
+/* ==================================================
+   DELETE USER CONFIRMATION MODAL
+================================================== */
+
+.delete-modal {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    z-index:
+        9999;
+
+    padding:
+        20px;
+}
+
+
+/* ==================================
+   SHOW MODAL
+================================== */
+
+.delete-modal.show {
+
+    display:
+        flex;
+}
+
+
+/* ==================================
+   BACKGROUND OVERLAY
+================================== */
+
+.delete-modal-overlay {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    
+
+    backdrop-filter:
+        blur(
+            4px
+        );
+}
+
+
+/* ==================================
+   MODAL CARD
+================================== */
+
+.delete-modal-card {
+
+    position:
+        relative;
+
+    width:
+        min(
+            100%,
+            430px
+        );
+
+    padding:
+        30px;
+
+    text-align:
+        center;
+
+    border:
+        1px solid
+        var(
+            --border-color,
+            #dbe2ea
+        );
+
+    border-radius:
+        18px;
+
+   
+
+    box-shadow:
+        0 25px 60px
+        rgba(
+            0,
+            0,
+            0,
+            0.25
+        );
+
+    animation:
+        deleteModalOpen
+        0.2s
+        ease;
+}
+
+
+/* ==================================
+   DELETE ICON
+================================== */
+
+.delete-modal-icon {
+
+    width:
+        65px;
+
+    height:
+        65px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin:
+        0 auto
+        18px;
+
+    border-radius:
+        50%;
+
+    
+
+    font-size:
+        25px;
+}
+
+
+/* ==================================
+   TEXT
+================================== */
+
+.delete-modal-card h3 {
+
+    margin:
+        0 0 10px;
+
+   
+
+    font-size:
+        22px;
+}
+
+
+.delete-modal-card p {
+
+    margin:
+        0;
+
+  
+
+    line-height:
+        1.7;
+}
+
+
+.delete-modal-warning {
+
+    margin-top:
+        8px
+        !important;
+
+    color:
+        #ef4444
+        !important;
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+}
+
+
+/* ==================================
+   BUTTONS
+================================== */
+
+.delete-modal-actions {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    gap:
+        12px;
+
+    margin-top:
+        25px;
+}
+
+
+.btn-danger {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        8px;
+
+    min-height:
+        42px;
+
+    padding:
+        0 18px;
+
+    border:
+        none;
+
+    border-radius:
+        8px;
+
+ 
+
+    cursor:
+        pointer;
+
+    font-weight:
+        600;
+
+    transition:
+        0.2s ease;
+}
+
+.btn-primary {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        8px;
+
+    min-height:
+        42px;
+
+    padding:
+        0 18px;
+
+    border:
+        none;
+
+    border-radius:
+        8px;
+
+ 
+
+    cursor:
+        pointer;
+
+    font-weight:
+        600;
+
+    transition:
+        0.2s ease;
+}
+
+
+.btn-danger:hover {
+
+    background:
+        #b91c1c;
+
+    transform:
+        translateY(
+            -1px
+        );
+}
+.btn-primary:hover {
+
+    
+
+    transform:
+        translateY(
+            -1px
+        );
+}
+
+
+/* ==================================
+   ANIMATION
+================================== */
+
+@keyframes deleteModalOpen {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            scale(
+                0.95
+            );
+
+    }
+
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            scale(
+                1
+            );
+
+    }
+
+}
+
+
+/* ==================================
+   DELETE BUTTON LOADING
+================================== */
+
+#confirmDeleteUser {
+
+    min-width:
+        140px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        8px;
+}
+
+
+/* ==================================
+   DISABLED BUTTON
+================================== */
+
+#confirmDeleteUser:disabled,
+#cancelDeleteUser:disabled {
+
+    cursor:
+        not-allowed;
+
+    opacity:
+        0.65;
+
+}
+
+
+/* ==================================
+   SPINNER
+================================== */
+
+#confirmDeleteUser
+.fa-spinner {
+
+    animation:
+        deleteSpinner
+        0.8s
+        linear
+        infinite;
+
+}
+
+
+@keyframes deleteSpinner {
+
+    from {
+
+        transform:
+            rotate(
+                0deg
+            );
+
+    }
+
+
+    to {
+
+        transform:
+            rotate(
+                360deg
+            );
+
+    }
+
+}
+
+/* ==================================
+   MOBILE
+================================== */
+
+@media (
+    max-width:
+    480px
+) {
+
+    .delete-modal {
+
+        padding:
+            15px;
+    }
+
+
+    .delete-modal-card {
+
+        padding:
+            24px
+            18px;
+    }
+
+
+    .delete-modal-actions {
+
+        flex-direction:
+            column-reverse;
+    }
+
+
+    .delete-modal-actions
+    button {
+
+        width:
+            100%;
+    }
+
+}

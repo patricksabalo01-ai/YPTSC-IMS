@@ -1,0 +1,262 @@
+{% extends "base.html" %} {% block title %} User Management | YPTSC IMS {%
+endblock %}
+
+<!-- ==================================
+     PAGE CSS
+================================== -->
+
+{% block css %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for(
+      'static',
+      filename='css/admin.css'
+  ) }}"
+/>
+
+<link
+  rel="stylesheet"
+  href="{{ url_for(
+      'static',
+      filename='css/modal.css'
+  ) }}"
+/>
+
+{% endblock %}
+
+<!-- ==================================
+     PAGE CONTENT
+================================== -->
+
+{% block content %}
+
+<section class="page-header">
+  <h2>{{ users_data.title }}</h2>
+
+  <p>Manage system users and access roles.</p>
+</section>
+
+<section class="content-card">
+  <!-- ==================================
+       TABLE HEADER
+  ================================== -->
+
+  <div class="table-header">
+    <h3>User List</h3>
+
+    <a
+      href="{{ url_for(
+          'admin.register_user'
+      ) }}"
+      class="btn-primary"
+    >
+      <i class="fa-solid fa-user-plus"></i>
+
+      Add User
+    </a>
+  </div>
+
+  <!-- ==================================
+       USER TABLE
+  ================================== -->
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Photo</th>
+
+        <th>Full Name</th>
+
+        <th>Username</th>
+
+        <th>Email</th>
+
+        <th>Role</th>
+
+        <th>Status</th>
+
+        <th>Created Date</th>
+
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% if users_data.users %} {% for user in users_data.users %}
+
+      <tr>
+        <!-- PHOTO -->
+
+        <td>
+          <div class="user-info">
+            <div class="user-avatar">{{ user.full_name[0]|upper }}</div>
+          </div>
+        </td>
+
+        <!-- FULL NAME -->
+
+        <td>
+          <strong> {{ user.full_name }} </strong>
+        </td>
+
+        <!-- USERNAME -->
+
+        <td>{{ user.username }}</td>
+
+        <!-- EMAIL -->
+
+        <td>{{ user.email }}</td>
+
+        <!-- ROLE -->
+
+        <td>
+          <span class="role-badge" data-role="{{ user.role }}">
+            {{ user.role }}
+          </span>
+        </td>
+
+        <!-- STATUS -->
+
+        <td>
+          {% if user.is_active %}
+
+          <span class="status-badge active"> Active </span>
+
+          {% else %}
+
+          <span class="status-badge inactive"> Inactive </span>
+
+          {% endif %}
+        </td>
+
+        <!-- CREATED DATE -->
+
+        <td>
+          {% if user.created_at %} {{ user.created_at.strftime( "%b %d, %Y" ) }}
+          {% else %} - {% endif %}
+        </td>
+
+        <!-- ACTIONS -->
+
+        <td>
+          <div class="action-buttons">
+            <!-- EDIT -->
+
+            <a
+              href="{{ url_for(
+                    'admin.update_user',
+                    user_id=user.id
+                ) }}"
+              class="btn-icon"
+              title="Edit User"
+            >
+              <i class="fa-solid fa-pen"></i>
+            </a>
+
+            <!-- DELETE -->
+
+            <form
+              method="POST"
+              action="{{ url_for(
+                    'admin.delete_user',
+                    user_id=user.id
+                ) }}"
+              class="delete-user-form"
+            >
+              <button
+                type="button"
+                class="btn-icon danger delete-user-btn"
+                title="Delete User"
+                data-user-name="{{ user.full_name }}"
+              >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+
+      {% endfor %} {% else %}
+
+      <tr>
+        <td colspan="8" class="empty-state">
+          <i class="fa-solid fa-users"></i>
+
+          <h4>No Users Found</h4>
+
+          <p>No user accounts have been registered yet.</p>
+
+          <a
+            href="{{ url_for(
+                  'admin.register_user'
+              ) }}"
+            class="btn-primary"
+          >
+            <i class="fa-solid fa-user-plus"></i>
+
+            Add User
+          </a>
+        </td>
+      </tr>
+
+      {% endif %}
+    </tbody>
+  </table>
+</section>
+
+<!-- ==================================
+     DELETE USER CONFIRMATION MODAL
+================================== -->
+
+<div id="deleteUserModal" class="delete-modal" aria-hidden="true">
+  <div class="delete-modal-overlay"></div>
+
+  <div
+    class="delete-modal-card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="deleteModalTitle"
+  >
+    <div class="delete-modal-icon">
+      <i class="fa-solid fa-trash"></i>
+    </div>
+
+    <h3 id="deleteModalTitle">Delete User?</h3>
+
+    <p>
+      Are you sure you want to delete
+
+      <strong id="deleteUserName"> this user </strong>?
+    </p>
+
+    <p class="delete-modal-warning">This action cannot be undone.</p>
+
+    <div class="delete-modal-actions">
+      <button type="button" id="cancelDeleteUser" class="btn-primary">
+        Cancel
+      </button>
+
+      <button type="button" id="confirmDeleteUser" class="btn-danger">
+        <i class="fa-solid fa-trash"></i>
+
+        Delete User
+      </button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+<!-- ==================================
+     PAGE JAVASCRIPT
+================================== -->
+
+{% block javascript %}
+
+<script src="{{ url_for(
+      'static',
+      filename='js/users.js'
+  ) }}"></script>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}
+Contract Management | YPTSC IMS
+{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h2>
+        {{ transaction_data.title }}
+    </h2>
+    <p>
+        Manage service contracts and agreements.
+    </p>
+</section>
+<section class="content-card">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>
+                    Contract No.
+                </th>
+                <th>
+                    Client
+                </th>
+                <th>
+                    Expiry Date
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3">
+                    No contract records yet.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock %}

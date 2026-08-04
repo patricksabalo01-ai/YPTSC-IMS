@@ -1,0 +1,68 @@
+/*BOX MODEL*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*HTML*/
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+/*BODY FOUNDATION*/
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal);
+}
+/*MEDIA*/
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+/*LINKS*/
+a {
+  text-decoration: none;
+  color: inherit;
+}
+/*FORM ELEMENTS*/
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+  border: 0;
+}
+/*LIST RESET*/
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/*TYPOGRAPHY RESET*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+/*TABLE RESET*/
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

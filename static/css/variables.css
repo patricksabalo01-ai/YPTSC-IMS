@@ -1,0 +1,77 @@
+/*DARK THEME DEFAULT*/
+:root {
+  /*BRAND COLORS*/
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent-color: #38bdf8;
+  /*BACKGROUND SYSTEM*/
+  --background-color: #080f1f;
+  --surface-color: #0f172a;
+  --card-color: #111827;
+  --panel-color: #172033;
+  --navbar-bg: rgba(15, 23, 42, 0.75);
+  --sidebar-bg: linear-gradient(180deg, #0f172a, #080f1f);
+  /*TEXT SYSTEM*/
+  --text-color: #f8fafc;
+  --muted-color: #94a3b8;
+  --light-text: #cbd5e1;
+  --heading-color: #ffffff;
+  /*BORDER SYSTEM*/
+  --border-color: rgba(148, 163, 184, 0.18);
+  --border-hover: rgba(56, 189, 248, 0.45);
+  /*STATUS COLORS*/
+  --success-color: #22c55e;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --info-color: #38bdf8;
+  /*LAYOUT*/
+  --sidebar-width: 260px;
+  --navbar-height: 70px;
+  /*RADIUS*/
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  /*SHADOW*/
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 15px 35px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 25px rgba(37, 99, blue, 0.35);
+  /*GLASS*/
+  --glass-bg: rgba(17, 24, 39, 0.75);
+  --blur: blur(18px);
+  /*TRANSITION*/
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.35s ease;
+}
+/*LIGHT THEME*/
+[data-theme="light"] {
+  /*BRAND COLORS*/
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --accent-color: #0ea5e9;
+  /*BACKGROUND SYSTEM*/
+  --background-color: #f3f6fb;
+  --surface-color: #ffffff;
+  --card-color: #ffffff;
+  --panel-color: #eef3f9;
+  --navbar-bg: rgba(255, 255, 255, 0.85);
+  --sidebar-bg: linear-gradient(180deg, #ffffff, #f3f6fb);
+  /*TEXT SYSTEM*/
+  --text-color: #111827;
+  --heading-color: #0f172a;
+  --muted-color: #64748b;
+  --light-text: #475569;
+  /*BORDER SYSTEM*/
+  --border-color: rgba(15, 23, 42, 0.12);
+  --border-hover: rgba(37, 99, 235, 0.35);
+  /*STATUS COLORS*/
+  --success-color: #16a34a;
+  --warning-color: #d97706;
+  --danger-color: #dc2626;
+  --info-color: #0284c7;
+  /*SHADOW SYSTEM*/
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 15px 35px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 18px rgba(37, 99, 235, 0.18);
+  /*GLASS EFFECT*/
+  --glass-bg: rgba(255, 255, 255, 0.75);
+}

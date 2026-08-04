@@ -1,0 +1,289 @@
+{% extends "base.html" %} {% block title %} Update User | YPTSC IMS {% endblock
+%} {% block css %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for(
+    'static',
+    filename='css/admin.css'
+) }}"
+/>
+
+{% endblock %} {% block content %} {% if user.role == "Administrator" %}
+
+<div class="alert alert-warning">
+  <i class="fa-solid fa-triangle-exclamation"></i>
+
+  <strong>Warning:</strong>
+
+  You are editing an Administrator account. Please exercise caution when making
+  changes to this user's information.
+</div>
+
+{% endif %}
+
+<section class="page-header">
+  <div class="page-header-content">
+    <h2>Update User</h2>
+
+    <p>Modify user account details and access permissions.</p>
+  </div>
+
+  <div class="page-header-actions">
+    <a
+      href="{{ url_for(
+                'admin.users'
+            ) }}"
+      class="btn-secondary"
+    >
+      <i class="fa-solid fa-arrow-left"></i>
+
+      Back to Users
+    </a>
+  </div>
+</section>
+
+<form
+  method="POST"
+  action="{{ url_for(
+        'admin.update_user',
+        user_id=user.id
+    ) }}"
+  class="user-form"
+>
+  <section class="user-form-card">
+    <!-- ==============================
+         FORM HEADER
+    =============================== -->
+
+    <div class="user-form-header">
+      <div>
+        <h3>User Account Information</h3>
+
+        <p>Update the selected user's account details.</p>
+      </div>
+
+      <div class="user-avatar-large">{{ user.full_name[0]|upper }}</div>
+    </div>
+
+    <!-- ==============================
+         FORM FIELDS
+    =============================== -->
+
+    <div class="form-grid">
+      <!-- FULL NAME -->
+
+      <div class="form-group">
+        <label for="full_name"> Full Name </label>
+
+        <input
+          type="text"
+          id="full_name"
+          name="full_name"
+          value="{{ user.full_name }}"
+          placeholder="Enter full name"
+          required
+        />
+      </div>
+
+      <!-- USERNAME -->
+
+      <div class="form-group">
+        <label for="username"> Username </label>
+
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value="{{ user.username }}"
+          placeholder="Enter username"
+          required
+        />
+      </div>
+
+      <!-- EMAIL -->
+
+      <div class="form-group">
+        <label for="email"> Email Address </label>
+
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="{{ user.email }}"
+          placeholder="Enter email address"
+          required
+        />
+      </div>
+
+      <!-- USER ROLE -->
+
+      <div class="form-group">
+        <label for="role"> User Role </label>
+
+        <select
+    id="role"
+    name="role"
+    required
+>
+
+    <option
+        value="Admin"
+        {% if user.role == "Admin" %}
+        selected
+        {% endif %}
+    >
+        Admin
+    </option>
+
+    <option
+        value="Staff"
+        {% if user.role == "Staff" %}
+        selected
+        {% endif %}
+    >
+        Staff
+    </option>
+
+    <option
+        value="Technician"
+        {% if user.role == "Technician" %}
+        selected
+        {% endif %}
+    >
+        Technician
+    </option>
+
+    <option
+        value="Client"
+        {% if user.role == "Client" %}
+        selected
+        {% endif %}
+    >
+        Client
+    </option>
+
+</select>
+      </div>
+
+      <!-- ACCOUNT STATUS -->
+
+      <div class="form-group">
+        <label for="is_active"> Account Status </label>
+
+        <select id="is_active" name="is_active" required>
+          <option value="true" {% if user.is_active %} selected {% endif %}>
+            Active
+          </option>
+
+          <option
+            value="false"
+            {%
+            if
+            not
+            user.is_active
+            %}
+            selected
+            {%
+            endif
+            %}
+          >
+            Inactive
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ==============================
+         PASSWORD SECTION
+    =============================== -->
+
+    <div class="password-section">
+      <div class="password-section-header">
+        <h3>Change Password</h3>
+
+        <p>Leave both fields empty to keep the current password.</p>
+      </div>
+
+      <div class="form-grid">
+        <!-- NEW PASSWORD -->
+
+        <div class="form-group">
+          <label for="password"> New Password </label>
+
+          <div class="password-input">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter new password"
+            />
+
+            <button
+              type="button"
+              class="password-toggle"
+              data-target="password"
+              title="Show password"
+            >
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- CONFIRM PASSWORD -->
+
+        <div class="form-group">
+          <label for="confirm_password"> Confirm New Password </label>
+
+          <div class="password-input">
+            <input
+              type="password"
+              id="confirm_password"
+              name="confirm_password"
+              placeholder="Confirm new password"
+            />
+
+            <button
+              type="button"
+              class="password-toggle"
+              data-target="confirm_password"
+              title="Show password"
+            >
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==============================
+         FORM ACTIONS
+    =============================== -->
+
+    <div class="form-actions">
+      <a
+        href="{{ url_for(
+                'admin.users'
+            ) }}"
+        class="btn-secondary"
+      >
+        Cancel
+      </a>
+
+      <button type="submit" class="btn-primary">
+        <i class="fa-solid fa-floppy-disk"></i>
+
+        Save Changes
+      </button>
+    </div>
+  </section>
+</form>
+
+{% endblock %} {% block javascript %}
+
+<script src="{{ url_for(
+        'static',
+        filename='js/update_user.js'
+    ) }}"></script>
+
+{% endblock %}

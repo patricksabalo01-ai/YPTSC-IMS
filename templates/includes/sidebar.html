@@ -1,0 +1,183 @@
+<aside class="sidebar">
+  <!-- SIDEBAR HEADER -->
+  <div class="sidebar-header">
+    <img
+      src="{{ url_for('static', filename='images/logo.png') }}"
+      class="sidebar-logo"
+    />
+
+    <div>
+      <h2>YPTSC IMS</h2>
+      <small>Inventory System</small>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="sidebar-menu">
+    <!-- DASHBOARD -->
+    <a href="{{ url_for('dashboard.dashboard') }}">
+      <span class="menu-icon">
+        <i class="fa-solid fa-chart-line"></i>
+      </span>
+
+      Dashboard
+    </a>
+
+    <!-- INVENTORY -->
+    <div class="menu-section">
+      <span> INVENTORY </span>
+
+      <a href="{{ url_for('inventory.units_inventory') }}">
+        <span class="menu-icon">
+          <i class="fa-solid fa-print"></i>
+        </span>
+
+        Units Inventory
+      </a>
+
+      <a href="{{ url_for('inventory.parts_inventory') }}">
+        <span class="menu-icon">
+          <i class="fa-solid fa-boxes-stacked"></i>
+        </span>
+
+        Parts Inventory
+      </a>
+    </div>
+
+    <!-- TRANSACTIONS -->
+
+<div class="menu-section">
+
+  <span>TRANSACTIONS</span>
+
+
+  <!-- PURCHASE -->
+
+  <a href="{{ url_for('transactions.purchase') }}">
+
+    <span class="menu-icon">
+
+      <i class="fa-solid fa-cart-plus"></i>
+
+    </span>
+
+    Purchase
+
+  </a>
+
+
+  <!-- DEPLOYMENT -->
+
+  <a href="{{ url_for('deployment.deployment') }}">
+
+    <span class="menu-icon">
+
+      <i class="fa-solid fa-truck-ramp-box"></i>
+
+    </span>
+
+    Deployment
+
+  </a>
+
+
+  <!-- STOCK TRANSACTIONS -->
+
+  <a href="{{ url_for('transactions.transactions') }}">
+
+    <span class="menu-icon">
+
+      <i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+    </span>
+
+    Stock Transactions
+
+  </a>
+
+
+  <!-- DELIVERY -->
+
+  <a href="{{ url_for('transactions.delivery') }}">
+
+    <span class="menu-icon">
+
+      <i class="fa-solid fa-truck"></i>
+
+    </span>
+
+    Delivery
+
+  </a>
+
+
+  <!-- REPAIR CENTER -->
+
+  <a href="{{ url_for('transactions.repair_center') }}">
+
+    <span class="menu-icon">
+
+      <i class="fa-solid fa-screwdriver-wrench"></i>
+
+    </span>
+
+    Repair Center
+
+  </a>
+
+
+  <!-- CONTRACTS -->
+
+  <a href="{{ url_for('transactions.contracts') }}">
+
+    <span class="menu-icon">
+
+      <i class="fa-solid fa-file-contract"></i>
+
+    </span>
+
+    Contracts
+
+  </a>
+
+</div>
+    <!-- REPORTS -->
+    <a href="{{ url_for('reports.reports') }}">
+      <span class="menu-icon">
+        <i class="fa-solid fa-chart-column"></i>
+      </span>
+
+      Reports
+    </a>
+
+    <!-- ADMIN -->
+    <div class="menu-section">
+      <span> ADMINISTRATION </span>
+
+      <a href="{{ url_for('admin.users') }}">
+        <span class="menu-icon">
+          <i class="fa-solid fa-users"></i>
+        </span>
+
+        Users
+      </a>
+
+      <a href="{{ url_for('admin.settings') }}">
+        <span class="menu-icon">
+          <i class="fa-solid fa-gear"></i>
+        </span>
+
+        Settings
+      </a>
+    </div>
+
+    <!-- LOGOUT -->
+    <a href="{{ url_for('auth.logout') }}" class="logout-link">
+      <span class="menu-icon">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </span>
+
+      Logout
+    </a>
+  </nav>
+</aside>

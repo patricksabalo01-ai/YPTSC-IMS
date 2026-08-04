@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block title %} Reports & Analytics | YPTSC IMS {%
+endblock %} {% block content %}
+<section class="page-header">
+  <h2>{{ reports_data.title }}</h2>
+  <p>Generate and monitor system reports.</p>
+</section>
+<section class="content-card">
+  <div class="table-header">
+    <h3>Available Reports</h3>
+  </div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Report Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for report in reports_data.available_reports %}
+      <tr>
+        <td>{{ report }}</td>
+        <td>
+          <button class="btn-primary">Generate</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

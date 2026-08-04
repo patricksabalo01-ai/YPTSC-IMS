@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block title %} System Settings | YPTSC IMS {%
+endblock %} {% block content %}
+
+<!-- ==================================================
+     PAGE HEADER
+================================================== -->
+
+<section class="page-header">
+  <div class="page-header-content">
+    <h2>{{ settings_data.title }}</h2>
+
+    <p>Configure system preferences and application settings.</p>
+  </div>
+</section>
+
+<!-- ==================================================
+     SETTINGS CONTAINER
+================================================== -->
+
+<section class="content-card admin-card settings-card">
+  <form class="settings-form" method="POST">
+    <!-- ==================================================
+     GENERAL SETTINGS
+================================================== -->
+
+    <div class="settings-section">
+      <div class="settings-section-header">
+        <h3>General Configuration</h3>
+
+        <p>Manage basic system information.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="system_name"> System Name </label>
+
+        <input
+          id="system_name"
+          name="system_name"
+          type="text"
+          value="{{ settings_data.system_name }}"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="company_name"> Company Name </label>
+
+        <input
+          id="company_name"
+          name="company_name"
+          type="text"
+          placeholder="Enter company name"
+        />
+      </div>
+    </div>
+
+    <!-- ==================================================
+     ACTION AREA
+================================================== -->
+
+    <div class="settings-actions">
+      <button type="submit" class="btn-primary">Save Settings</button>
+    </div>
+  </form>
+</section>
+
+{% endblock %}

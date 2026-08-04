@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}
+Purchase Management | YPTSC IMS
+{% endblock %}
+{% block content %}
+<section class="page-header">
+    <h2>
+        {{ transaction_data.title }}
+    </h2>
+    <p>
+        Manage supplier purchases and incoming inventory.
+    </p>
+</section>
+<section class="content-card">
+    <div class="table-header">
+        <h3>
+            Purchase Records
+        </h3>
+        <button class="btn-primary">
+            Add Purchase
+        </button>
+    </div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>
+                    Purchase No.
+                </th>
+
+                <th>
+                    Supplier
+                </th>
+
+                <th>
+                    Date
+                </th>
+
+                <th>
+                    Status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4">
+                    No purchase records yet.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock %}

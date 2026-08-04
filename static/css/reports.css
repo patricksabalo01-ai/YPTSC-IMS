@@ -1,0 +1,109 @@
+/*REPORT CONTAINER*/
+.report-container {
+  display: grid;
+  gap: 25px;
+}
+/*REPORT CARD*/
+.report-card {
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+.report-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+.report-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-glow);
+  border-color: var(--border-hover);
+}
+.report-card h3 {
+  color: var(--text-color);
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+.report-card p {
+  color: var(--muted-color);
+}
+/*REPORT SUMMARY CARDS*/
+.report-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.report-value {
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+/*REPORT ACTIONS*/
+.report-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn-export {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--accent-color)
+  );
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+.btn-export:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.5);
+}
+/*CHART AREA*/
+.chart-container {
+  min-height: 320px;
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+}
+.chart-container:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+/*REPORT TABLE*/
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.report-table th {
+  padding: 15px;
+  text-align: left;
+  background: var(--panel-color);
+  color: var(--muted-color);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+.report-table td {
+  padding: 15px;
+  color: var(--light-text);
+  border-bottom: 1px solid var(--border-color);
+}
+.report-table tbody tr:hover {
+  background: rgba(37, 99, 235, 0.08);
+}

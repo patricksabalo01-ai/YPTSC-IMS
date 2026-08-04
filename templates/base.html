@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="YPTSC Inventory Management System" />
+    <title>{% block title %} YPTSC IMS {% endblock %}</title>
+    <!-- ==================================================
+     THEME PRELOAD
+     Prevent Theme Flash
+================================================== -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("YPTSC_THEME");
+        if (savedTheme === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+    <!-- ==================================================
+     FAVICON
+================================================== -->
+    <link
+      rel="icon"
+      href="{{ url_for('static',filename='images/logo.png') }}"
+    />
+    <!-- ==================================================
+     GOOGLE FONT
+================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- ==================================================
+     FONT AWESOME
+================================================== -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <!-- ==================================================
+     CHART JS
+================================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- ==================================================
+     CORE CSS
+================================================== -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/variables.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/reset.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/typography.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/style.css') }}"
+    />
+    <!-- ==================================================
+     PAGE SPECIFIC CSS
+================================================== -->
+    {% block css %} {% endblock %}
+  </head>
+  <body>
+    <!-- ==================================================
+     SIDEBAR
+================================================== -->
+    {% include "includes/sidebar.html" %}
+    <!-- ==================================================
+     MAIN APPLICATION WRAPPER
+================================================== -->
+    <div class="main-wrapper">
+      <!-- ==================================================
+     NAVBAR
+================================================== -->
+      {% include "includes/navbar.html" %}
+      <!-- ==================================================
+     PAGE CONTENT
+================================================== -->
+      <main class="page-content">
+        <!-- ==================================================
+     FLASH MESSAGE SYSTEM
+================================================== -->
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %} {% endif %} {% endwith %}
+        <!-- ==================================================
+     PAGE CONTENT BLOCK
+================================================== -->
+        {% block content %} {% endblock %}
+      </main>
+    </div>
+    <!-- ==================================================
+     GLOBAL JAVASCRIPT
+================================================== -->
+    <script src="{{ url_for('static',filename='js/app.js') }}" defer></script>
+    <script
+      src="{{ url_for('static',filename='js/sidebar.js') }}"
+      defer
+    ></script>
+    <script src="{{ url_for('static',filename='js/theme.js') }}" defer></script>
+    <script src="{{ url_for('static',filename='js/forms.js') }}" defer></script>
+    <!-- ==================================================
+     PAGE JAVASCRIPT
+================================================== -->
+    {% block javascript %} {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,394 @@
+{% extends "base.html" %} {% block title %} Dashboard | YPTSC IMS {% endblock %}
+{% block content %}
+<!-- ==================================================
+     DASHBOARD HEADER
+================================================== -->
+<section class="dashboard-header">
+  <div class="header-content">
+    <h2>Dashboard</h2>
+    <p>Real-time inventory monitoring and operational overview</p>
+  </div>
+  <div class="dashboard-status">
+    <i class="fa-solid fa-circle-check"></i>
+    <span> System Online </span>
+  </div>
+</section>
+<!-- ==================================================
+     EXECUTIVE KPI SUMMARY
+================================================== -->
+<section class="dashboard-cards">
+  <div class="dash-card">
+    <div class="card-icon">
+      <i class="fa-solid fa-boxes-stacked"></i>
+    </div>
+    <h3>Total Inventory</h3>
+    <strong> {{ dashboard_data.total_units }} </strong>
+    <span> Units & Parts Records </span>
+  </div>
+  <div class="dash-card">
+    <div class="card-icon">
+      <i class="fa-solid fa-print"></i>
+    </div>
+    <h3>Total Machines</h3>
+    <strong> {{ dashboard_data.total_units|default(0) }} </strong>
+    <span> Printer & Copier Assets </span>
+  </div>
+  <div class="dash-card card-success">
+    <div class="card-icon">
+      <i class="fa-solid fa-location-dot"></i>
+    </div>
+    <h3>Deployed Machines</h3>
+    <strong> {{ dashboard_data.installed }} </strong>
+    <span> Currently Installed Units </span>
+  </div>
+  <div class="dash-card card-warning">
+    <div class="card-icon">
+      <i class="fa-solid fa-screwdriver-wrench"></i>
+    </div>
+    <h3>Service Monitoring</h3>
+    <strong> {{ dashboard_data.repair }} </strong>
+    <span> Repair & Maintenance Units </span>
+  </div>
+  <div class="dash-card card-danger">
+    <div class="card-icon">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
+    <h3>Low Stock Alert</h3>
+    <strong> {{ dashboard_data.low_stock|default(0) }} </strong>
+    <span> Requires replenishment </span>
+  </div>
+</section>
+<!-- ==================================================
+     ANALYTICS & REPORTING
+================================================== -->
+<section class="dashboard-analytics">
+  <div class="analytics-grid charts-layout">
+    <!-- ===============================
+     MACHINE LIFECYCLE CHART
+================================ -->
+    <div class="flow-card chart-card">
+      <div class="graph-header">
+        <div>
+          <h3>Machine Lifecycle Analytics</h3>
+          <span> Equipment status distribution </span>
+        </div>
+        <i class="fa-solid fa-chart-column"></i>
+      </div>
+      <div class="chart-container">
+        <canvas id="inventoryChart"></canvas>
+      </div>
+    </div>
+    <!-- ===============================
+     PARTS DISTRIBUTION CHART
+================================ -->
+    <div class="flow-card chart-card">
+      <div class="graph-header">
+        <div>
+          <h3>Parts Inventory Distribution</h3>
+          <span> Warehouse stock category monitoring </span>
+        </div>
+        <i class="fa-solid fa-chart-pie"></i>
+      </div>
+      <div class="chart-container">
+        <canvas id="stockChart"></canvas>
+      </div>
+    </div>
+    <!-- ===============================
+     REPAIR TREND CHART
+================================ -->
+    <div class="flow-card chart-card repair-chart-card">
+      <div class="graph-header">
+        <div>
+          <h3>Repair Trend Analysis</h3>
+          <span> Monthly repair activity monitoring </span>
+        </div>
+        <i class="fa-solid fa-chart-line"></i>
+      </div>
+      <div class="chart-container">
+        <canvas id="repairChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ==================================================
+     MACHINE LIFECYCLE MONITORING
+================================================== -->
+<section class="inventory-status">
+  <div class="flow-card">
+    <div class="graph-header">
+      <div>
+        <h3>Machine Lifecycle Monitoring</h3>
+        <span> Warehouse → Deployment → Recovery </span>
+      </div>
+      <i class="fa-solid fa-route"></i>
+    </div>
+    <div class="status-grid">
+      {% set lifecycle = [ ("fa-box","Available","available"),
+      ("fa-bookmark","Reserved","reserved"),
+      ("fa-print","Installed","installed"), ("fa-rotate-left","Pulled
+      Out","pulled_out"), ("fa-screwdriver-wrench","Under Repair","repair"),
+      ("fa-trash","Disposal","disposal") ] %} {% for icon,label,key in lifecycle
+      %}
+      <div class="status-box">
+        <i class="fa-solid {{ icon }}"></i>
+        <div>
+          <span> {{ label }} </span>
+          <strong> {{ dashboard_data[key]|default(0) }} </strong>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- ==================================================
+     OPERATION OVERVIEW
+================================================== -->
+<section class="dashboard-overview">
+  <div class="overview-grid">
+    <!-- ===============================
+     MACHINE STATUS SUMMARY
+================================ -->
+    <div class="flow-card">
+      <div class="graph-header">
+        <div>
+          <h3>Machine Status Overview</h3>
+          <span> Current asset distribution </span>
+        </div>
+        <i class="fa-solid fa-chart-pie"></i>
+      </div>
+      <div class="overview-list">
+        <div class="overview-item">
+          <span>
+            <i class="fa-solid fa-box"></i>
+            Available
+          </span>
+          <strong> {{ dashboard_data.available|default(0) }} </strong>
+        </div>
+        <div class="overview-item">
+          <span>
+            <i class="fa-solid fa-print"></i>
+            Installed
+          </span>
+          <strong> {{ dashboard_data.installed|default(0) }} </strong>
+        </div>
+        <div class="overview-item">
+          <span>
+            <i class="fa-solid fa-bookmark"></i>
+            Reserved
+          </span>
+          <strong> {{ dashboard_data.reserved|default(0) }} </strong>
+        </div>
+        <div class="overview-item">
+          <span>
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            Repair
+          </span>
+          <strong> {{ dashboard_data.repair|default(0) }} </strong>
+        </div>
+        <div class="overview-item">
+          <span>
+            <i class="fa-solid fa-trash"></i>
+            Disposed
+          </span>
+          <strong> {{ dashboard_data.disposal|default(0) }} </strong>
+        </div>
+      </div>
+    </div>
+    <!-- ===============================
+     INVENTORY ACTIVITY
+================================ -->
+    <div class="flow-card">
+      <div class="graph-header">
+        <div>
+          <h3>Inventory Activity</h3>
+          <span> Recent operational movement </span>
+        </div>
+        <i class="fa-solid fa-chart-line"></i>
+      </div>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-icon">
+            <i class="fa-solid fa-arrow-down"></i>
+          </div>
+          <div>
+            <strong> Incoming Inventory </strong>
+            <span> New registered units and parts </span>
+          </div>
+          <b> {{ dashboard_data.incoming|default(0) }} </b>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">
+            <i class="fa-solid fa-arrow-up"></i>
+          </div>
+          <div>
+            <strong> Released Assets </strong>
+            <span> Deployed machines and issued parts </span>
+          </div>
+          <b> {{ dashboard_data.released|default(0) }} </b>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">
+            <i class="fa-solid fa-rotate"></i>
+          </div>
+          <div>
+            <strong> Maintenance Activity </strong>
+            <span> Repair and recovery records </span>
+          </div>
+          <b> {{ dashboard_data.maintenance|default(0) }} </b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ==================================================
+     PARTS INVENTORY SUMMARY
+================================================== -->
+<section class="parts-status">
+  <div class="flow-card">
+    <div class="graph-header">
+      <div>
+        <h3>Parts Inventory Summary</h3>
+        <span> Consumables and warehouse stock monitoring </span>
+      </div>
+      <i class="fa-solid fa-layer-group"></i>
+    </div>
+    <div class="status-grid">
+      {% set parts_inventory = [ ("fa-gears", "Spare Parts", "spare_parts"),
+      ("fa-box-open", "Consumables", "consumables"), ("fa-print", "Toner",
+      "toner"), ("fa-droplet", "Ink", "ink"), ("fa-boxes-stacked", "Office
+      Supplies", "office_supplies") ] %} {% for icon,label,key in
+      parts_inventory %}
+      <div class="status-box">
+        <i class="fa-solid {{ icon }}"></i>
+        <div>
+          <span> {{ label }} </span>
+          <strong> {{ dashboard_data[key]|default(0) }} </strong>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- ==================================================
+     RECENT INVENTORY TRANSACTIONS
+================================================== -->
+<section class="recent-transactions">
+  <div class="flow-card">
+    <div class="graph-header">
+      <div>
+        <h3>Recent Inventory Transactions</h3>
+        <span> Latest system activities </span>
+      </div>
+      <i class="fa-solid fa-clock-rotate-left"></i>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Reference</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if dashboard_data.recent_transactions %} {% for transaction in
+          dashboard_data.recent_transactions %}
+          <tr>
+            <td>{{ transaction.reference|default("-") }}</td>
+            <td>{{ transaction.category|default("-") }}</td>
+            <td>{{ transaction.description|default("-") }}</td>
+            <td>
+              <span class="status-badge">
+                {{ transaction.status|default("Completed") }}
+              </span>
+            </td>
+            <td>{{ transaction.date|default("-") }}</td>
+          </tr>
+          {% endfor %} {% else %}
+          <tr>
+            <td colspan="5" class="empty-state">
+              No recent transactions available
+            </td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- ==================================================
+     DASHBOARD DATA FOR CHARTS
+================================================== -->
+<script>
+
+  window.dashboardData = {
+
+      available: Number(
+          "{{ dashboard_data.available|default(0) }}"
+      ),
+
+      installed: Number(
+          "{{ dashboard_data.installed|default(0) }}"
+      ),
+
+      reserved: Number(
+          "{{ dashboard_data.reserved|default(0) }}"
+      ),
+
+      pulled_out: Number(
+          "{{ dashboard_data.pulled_out|default(0) }}"
+      ),
+
+      repair: Number(
+          "{{ dashboard_data.repair|default(0) }}"
+      ),
+
+      disposal: Number(
+          "{{ dashboard_data.disposal|default(0) }}"
+      ),
+
+      spare_parts: Number(
+          "{{ dashboard_data.spare_parts|default(0) }}"
+      ),
+
+      consumables: Number(
+          "{{ dashboard_data.consumables|default(0) }}"
+      ),
+
+      toner: Number(
+          "{{ dashboard_data.toner|default(0) }}"
+      ),
+
+      ink: Number(
+          "{{ dashboard_data.ink|default(0) }}"
+      ),
+
+      office_supplies: Number(
+          "{{ dashboard_data.office_supplies|default(0) }}"
+      ),
+
+      repair_chart: {{
+          dashboard_data.repair_chart
+          | default([], true)
+          | tojson
+      }}
+
+  };
+
+  console.log(
+      "YPTSC Dashboard Data Loaded:",
+      window.dashboardData
+  );
+</script>
+{% endblock %}
+<!-- ==================================================
+     DASHBOARD JAVASCRIPT
+================================================== -->
+{% block javascript %}
+<script src="{{ url_for(
+    'static',
+    filename='js/dashboard.js'
+) }}"></script>
+{% endblock %}

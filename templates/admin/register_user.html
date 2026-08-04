@@ -1,0 +1,182 @@
+{% extends "base.html" %} {% block title %} Register User | YPTSC IMS {%
+endblock %} {% block css %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for(
+    'static',
+    filename='css/admin.css'
+) }}"
+/>
+
+{% endblock %} {% block content %}
+
+<section class="page-header">
+  <div class="page-header-content">
+    <h2>Register User</h2>
+
+    <p>Create a new user account and assign access permissions.</p>
+  </div>
+</section>
+
+<section class="content-card">
+  <form method="POST" action="{{ url_for('admin.register_user') }}">
+    <div class="form-grid">
+      <!-- ==================================
+                 FULL NAME
+            ================================== -->
+
+      <div class="form-group">
+        <label for="full_name"> Full Name </label>
+
+        <input
+          type="text"
+          id="full_name"
+          name="full_name"
+          placeholder="Enter full name"
+          required
+        />
+      </div>
+
+      <!-- ==================================
+                 USERNAME
+            ================================== -->
+
+      <div class="form-group">
+        <label for="username"> Username </label>
+
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter username"
+          required
+        />
+      </div>
+
+      <!-- ==================================
+                 EMAIL
+            ================================== -->
+
+      <div class="form-group">
+        <label for="email"> Email Address </label>
+
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter email address"
+          required
+        />
+      </div>
+
+      <!-- ==================================
+                 ROLE
+            ================================== -->
+
+      <div class="form-group">
+        <label for="role"> User Role </label>
+
+        <select id="role" name="role" required>
+          <option value="">Select role</option>
+
+          <option value="Admin">Admin</option>
+
+          <option value="Staff">Staff</option>
+
+          <option value="Technician">Technician</option>
+
+          <option value="Client">Client</option>
+        </select>
+      </div>
+
+      <!-- ==================================
+                 PASSWORD
+            ================================== -->
+
+      <div class="form-group">
+        <label for="password"> Password </label>
+           <div class="password-input">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter password"
+          required
+        />
+           <button
+              type="button"
+              class="password-toggle"
+              data-target="password"
+              title="Show password"
+            >
+              <i class="fa-solid fa-eye"></i>
+            </button>
+            </div>
+      </div>
+
+      <!-- ==================================
+                 CONFIRM PASSWORD
+            ================================== -->
+
+      <div class="form-group">
+        <label for="confirm_password"> Confirm Password </label>
+<div class="password-input">
+        <input
+          type="password"
+          id="confirm_password"
+          name="confirm_password"
+          placeholder="Confirm password"
+          required
+        />
+     
+              <button
+              type="button"
+              class="password-toggle"
+              data-target="confirm_password"
+              title="Show password"
+            >
+              <i class="fa-solid fa-eye"></i>
+            </button>
+            </div>
+      </div>
+
+      <!-- ==================================
+                 ACCOUNT STATUS
+            ================================== -->
+
+      <div class="form-group">
+        <label for="is_active"> Account Status </label>
+
+        <select id="is_active" name="is_active" required>
+          <option value="true">Active</option>
+
+          <option value="false">Inactive</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ==================================
+             FORM ACTIONS
+        ================================== -->
+
+    <div class="form-actions">
+      <a href="{{ url_for('admin.users') }}" class="btn-secondary"> Cancel </a>
+
+      <button type="submit" class="btn-primary">
+        <i class="fa-solid fa-user-plus"></i>
+
+        Create User
+      </button>
+    </div>
+  </form>
+</section>
+
+{% endblock %} {% block javascript %}
+
+<script src="{{ url_for(
+        'static',
+        filename='js/update_user.js'
+    ) }}"></script>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+<header class="navbar">
+  <!-- =================================
+         LEFT SIDE
+    ================================== -->
+  <div class="navbar-left">
+    <!-- SIDEBAR BUTTON -->
+    <button class="sidebar-toggle" id="sidebarToggle" type="button">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <!-- PAGE TITLE -->
+    <div class="page-heading">
+      <h1>
+        {% block page_title %} YPTSC Inventory Management System {% endblock %}
+      </h1>
+      <span> Enterprise Resource Management </span>
+    </div>
+  </div>
+  <!-- =================================
+         RIGHT SIDE
+    ================================== -->
+  <div class="navbar-right">
+    <!-- SYSTEM STATUS -->
+    <div class="system-status">
+      <span class="status-dot"></span>
+      <span> Online </span>
+    </div>
+    <!-- THEME SWITCH -->
+    <button
+      id="themeToggle"
+      class="theme-toggle"
+      type="button"
+      title="Toggle Theme"
+    >
+      <i class="fa-solid fa-sun" id="themeIcon"> </i>
+    </button>
+    <!-- USER PROFILE -->
+    <div class="user-profile">
+      <div class="user-avatar">{{ (current_user or "G")[0]|upper }}</div>
+      <div class="user-info">
+        <span class="user-name"> {{ current_user or "Guest" }} </span>
+        <span class="user-role"> {{ user_role or "User" }} </span>
+      </div>
+    </div>
+  </div>
+</header>

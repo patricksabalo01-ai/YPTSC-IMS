@@ -1,0 +1,24 @@
+/*FOUNDATION*/
+/* Theme Variables */
+@import url("./variables.css");
+/* CSS Reset */
+@import url("./reset.css");
+/* Typography System */
+@import url("./typography.css");
+/*APPLICATION LAYOUT*/
+@import url("./layout.css");
+/*GLOBAL UI COMPONENTS*/
+@import url("./components.css");
+/*MODULE STYLES*/
+/* Dashboard */
+@import url("./dashboard.css");
+/* Inventory */
+@import url("./inventory.css");
+/* Forms */
+@import url("./forms.css");
+/* Tables */
+@import url("./tables.css");
+/* Buttons */
+@import url("./buttons.css");
+/*RESPONSIVE SYSTEM*/
+@import url("./responsive.css");

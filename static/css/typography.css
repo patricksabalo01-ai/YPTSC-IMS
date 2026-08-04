@@ -1,0 +1,87 @@
+/*GLOBAL TYPOGRAPHY*/
+body {
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+/*HEADINGS*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-color);
+  letter-spacing: -0.02em;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+h4 {
+  font-size: 18px;
+  font-weight: 600;
+}
+h5 {
+  font-size: 16px;
+  font-weight: 600;
+}
+h6 {
+  font-size: 14px;
+  font-weight: 600;
+}
+/*PARAGRAPH*/
+p {
+  color: var(--muted-color);
+}
+/*LABEL*/
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+/*SMALL TEXT*/
+small {
+  font-size: 12px;
+  color: var(--muted-color);
+}
+/*TEXT UTILITIES*/
+.text-muted {
+  color: var(--muted-color);
+}
+.text-light {
+  color: var(--light-text);
+}
+.text-primary {
+  color: var(--primary-color);
+}
+.text-success {
+  color: var(--success-color);
+}
+.text-danger {
+  color: var(--danger-color);
+}
+.text-warning {
+  color: var(--warning-color);
+}
+/*ALIGNMENT*/
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}

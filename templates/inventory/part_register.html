@@ -1,0 +1,135 @@
+```html {% extends "base.html" %} {% block title %} Register Part | YPTSC IMS {%
+endblock %} {% block css %}
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/inventory.css') }}"
+/>
+
+{% endblock %} {% block content %}
+
+<section class="page-header">
+  <div class="page-header-content">
+    <h2>Register Part</h2>
+
+    <p>Add spare parts, consumables, and office supplies inventory records.</p>
+  </div>
+</section>
+
+<form method="POST" action="{{ url_for('inventory.register_part') }}">
+  {% if csrf_token %} {{ csrf_token() }} {% endif %}
+
+  <section class="form-section">
+    <div class="section-header">
+      <h3>Part Information</h3>
+
+      <span> Basic identification and classification details. </span>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label> Category </label>
+
+        <select name="category" required>
+          <option value="">Select Category</option>
+
+          <option>Spare Parts</option>
+
+          <option>Consumables</option>
+
+          <option>Office Supplies</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label> Part Number </label>
+
+        <input
+          type="text"
+          name="part_number"
+          placeholder="Example: C-EXV59"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label> Description </label>
+
+        <input
+          type="text"
+          name="description"
+          placeholder="Example: Black Toner Cartridge"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label> Brand </label>
+
+        <input type="text" name="brand" placeholder="Canon, Epson, Ricoh" />
+      </div>
+
+      <div class="form-group">
+        <label> Compatible Model </label>
+
+        <input
+          type="text"
+          name="compatible_model"
+          placeholder="Example: Canon IR ADV 4525"
+        />
+      </div>
+
+      <div class="form-group">
+        <label> Supplier </label>
+
+        <input type="text" name="supplier" placeholder="Supplier Name" />
+      </div>
+
+      <div class="form-group">
+        <label> Stock Quantity </label>
+
+        <input type="number" name="stock" min="0" value="0" required />
+      </div>
+
+      <div class="form-group">
+        <label> Minimum Stock Alert </label>
+
+        <input type="number" name="minimum_stock" min="0" value="0" />
+      </div>
+
+      <div class="form-group">
+        <label> Storage Location </label>
+
+        <input
+          type="text"
+          name="location"
+          placeholder="Warehouse / Storage Area"
+        />
+      </div>
+
+      <div class="form-group">
+        <label> Status </label>
+
+        <select name="status" required>
+          <option value="">Select Status</option>
+
+          <option>Available</option>
+
+          <option>Low Stock</option>
+
+          <option>Out of Stock</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <div class="form-actions">
+    <a href="{{ url_for('inventory.parts_inventory') }}" class="btn-secondary">
+      Cancel
+    </a>
+
+    <button type="submit" class="btn-primary">Register Part</button>
+  </div>
+</form>
+
+{% endblock %} ```
