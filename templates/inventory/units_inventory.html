@@ -1,12 +1,8 @@
 {% extends "base.html" %}
-
 {% block title %}
 Units Inventory | YPTSC IMS
 {% endblock %}
-
-
 {% block css %}
-
 <link
   rel="stylesheet"
   href="{{ url_for(
@@ -14,7 +10,6 @@ Units Inventory | YPTSC IMS
     filename='css/inventory.css'
   ) }}"
 />
-
 <link
   rel="stylesheet"
   href="{{ url_for(
@@ -22,270 +17,161 @@ Units Inventory | YPTSC IMS
     filename='css/modal.css'
   ) }}"
 />
-
 {% endblock %}
-
-
 {% block content %}
-
-<!-- ==================================================
-     PAGE HEADER
-================================================== -->
-
+<!--PAGE HEADER-->
 <section class="page-header">
-
   <div class="page-header-content">
-
     <h2>
       Units Inventory
     </h2>
-
     <p>
       Manage registered printers, copiers, and equipment assets.
     </p>
-
   </div>
-
-
   <div class="page-header-actions">
-
     <a
       href="{{ url_for(
         'inventory.unit_register'
       ) }}"
       class="btn-primary"
     >
-
       <i class="fa-solid fa-plus"></i>
-
       Register Unit
-
     </a>
-
-
     <button
       type="button"
       class="btn-secondary"
     >
-
       <i class="fa-solid fa-file-import"></i>
-
       Import Excel
-
     </button>
-
-
     <button
       type="button"
       class="btn-secondary"
     >
-
       <i class="fa-solid fa-file-export"></i>
-
       Export Excel
-
     </button>
-
   </div>
-
 </section>
-
-
-<!-- ==================================================
-     INVENTORY TABLE
-================================================== -->
-
+<!--INVENTORY TABLE-->
 <section class="content-card">
-
-  <!-- ==================================================
-       TABLE HEADER
-  ================================================== -->
-
+  <!--TABLE HEADER-->
   <div class="table-header">
-
     <div>
-
       <h3>
         Equipment Inventory
       </h3>
-
       <span>
         Complete list of registered equipment units.
       </span>
-
     </div>
-
-
-    <!-- ==================================================
-         SEARCH AND FILTERS
-    ================================================== -->
-
+    <!--SEARCH AND FILTERS-->
     <div class="table-tools">
-
-      <!-- SEARCH -->
-
+      <!--SEARCH-->
       <input
         type="search"
         id="unitSearch"
         class="search-input"
         placeholder="Search asset code, brand, model, serial..."
       />
-
-
-      <!-- CATEGORY -->
-
+      <!--CATEGORY-->
       <select
         id="categoryFilter"
         class="filter-select"
       >
-
         <option value="">
           All Categories
         </option>
-
-
         {% set categories = [] %}
-
-
         {% for unit in inventory_data.units %}
-
           {% if
             unit.unit_category
             and
             unit.unit_category
             not in categories
           %}
-
             {% set _ =
               categories.append(
                 unit.unit_category
               )
             %}
-
             <option
               value="{{ unit.unit_category }}"
             >
-
               {{ unit.unit_category }}
-
             </option>
-
           {% endif %}
-
         {% endfor %}
-
       </select>
-
-
-      <!-- STATUS -->
-
+      <!--STATUS-->
       <select
         id="statusFilter"
         class="filter-select"
       >
-
         <option value="">
           All Statuses
         </option>
-
-
         {% set statuses = [] %}
-
-
         {% for unit in inventory_data.units %}
-
           {% if
             unit.status
             and
             unit.status
             not in statuses
           %}
-
             {% set _ =
               statuses.append(
                 unit.status
               )
             %}
-
             <option
               value="{{ unit.status }}"
             >
-
               {{ unit.status }}
-
             </option>
-
           {% endif %}
-
         {% endfor %}
-
       </select>
-
     </div>
-
   </div>
-
-
-  <!-- ==================================================
-       TABLE
-  ================================================== -->
-
+  <!--TABLE-->
   <div class="table-container">
-
     <table class="data-table">
-
       <thead>
-
         <tr>
-
           <th>
             QR
           </th>
-
           <th>
             Asset Code
           </th>
-
           <th>
             Equipment
           </th>
-
           <th>
             Serial Number
           </th>
-
           <th>
             Status
           </th>
-
           <th>
             Actions
           </th>
-
         </tr>
-
       </thead>
-
-
       <tbody>
-
         {% if inventory_data.units %}
-
-
           {% for unit in inventory_data.units %}
-
           <tr
             class="unit-row"
             data-category="{{ unit.unit_category }}"
             data-status="{{ unit.status }}"
           >
-
             <!-- QR -->
-
             <td>
-
               {% if unit.qr_code %}
-
               <img
                 src="{{ url_for(
                   'static',
@@ -294,373 +180,201 @@ Units Inventory | YPTSC IMS
                 class="qr-preview"
                 alt="{{ unit.asset_code }}"
               />
-
               {% else %}
-
               <span class="qr-empty">
                 No QR
               </span>
-
               {% endif %}
-
             </td>
-
-
             <!-- ASSET CODE -->
-
             <td>
-
               <strong>
                 {{ unit.asset_code }}
               </strong>
-
             </td>
-
-
             <!-- EQUIPMENT -->
-
             <td>
-
               {{ unit.brand }}
-
               <br />
-
               <span class="text-muted">
-
                 {{ unit.model }}
-
               </span>
-
               <br />
-
               <span class="text-muted">
-
                 {{ unit.unit_category }}
-
               </span>
-
             </td>
-
-
-            <!-- SERIAL NUMBER -->
-
+            <!--SERIAL NUMBER-->
             <td>
-
               {{ unit.serial_number }}
-
             </td>
-
-
-            <!-- STATUS -->
-
+            <!--STATUS-->
             <td>
-
               <span
                 class="status-badge"
                 data-status="{{ unit.status }}"
               >
-
                 {{ unit.status }}
-
               </span>
-
             </td>
-
-
-            <!-- ACTIONS -->
-
+            <!--ACTIONS-->
             <td>
-
               <div class="action-buttons">
-
-                <!-- VIEW -->
-
+                <!--VIEW-->
                 <a
-                  href="{{ url_for(
-                    'inventory.view_unit',
-                    asset_code=unit.asset_code
-                  ) }}"
+                  href="{{ url_for('inventory.view_unit',asset_code=unit.asset_code) }}"
                   class="btn-icon"
                   title="View Details"
                 >
-
                   <i class="fa-solid fa-eye"></i>
-
                 </a>
-
-
-                <!-- EDIT -->
-
+                <!--EDIT-->
                 <a
-                  href="{{ url_for(
-                    'inventory.edit_unit',
-                    asset_code=unit.asset_code
-                  ) }}"
+                  href="{{ url_for('inventory.edit_unit',asset_code=unit.asset_code) }}"
                   class="btn-icon"
                   title="Edit Unit"
                 >
-
                   <i class="fa-solid fa-pen"></i>
-
                 </a>
-
-
-                <!-- QR -->
-
+                <!--QR-->
                 {% if unit.qr_code %}
-
                 <a
-                  href="{{ url_for(
-                    'static',
-                    filename=unit.qr_code
-                  ) }}"
+                  href="{{ url_for('static',filename=unit.qr_code) }}"
                   target="_blank"
                   class="btn-icon"
                   title="Print QR"
                 >
-
                   <i class="fa-solid fa-qrcode"></i>
-
                 </a>
-
                 {% endif %}
-
-
-                <!-- DELETE -->
-
+                <!--DELETE-->
               <form
   method="POST"
-  action="{{ url_for(
-    'inventory.delete_unit',
-    asset_code=unit.asset_code
-  ) }}"
+  action="{{ url_for('inventory.delete_unit',asset_code=unit.asset_code) }}"
   class="delete-unit-form"
 >
-
   <button
     type="button"
     class="btn-icon danger delete-unit-btn"
     title="Delete Unit"
     data-unit-name="{{ unit.asset_code }}"
   >
-
     <i class="fa-solid fa-trash"></i>
-
   </button>
-
 </form>
-
               </div>
-
             </td>
-
           </tr>
-
           {% endfor %}
-
-
-          <!-- ==================================================
-               NO FILTER RESULTS
-          ================================================== -->
-
+          <!--NO FILTER RESULTS-->
           <tr
             id="noFilterResults"
             style="display: none;"
           >
-
             <td
               colspan="6"
               class="empty-state"
             >
-
               <i class="fa-solid fa-magnifying-glass"></i>
-
               <h4>
                 No Matching Units
               </h4>
-
               <p>
                 No units match your search or selected filters.
               </p>
-
             </td>
-
           </tr>
-
-
         {% else %}
-
-
-          <!-- ==================================================
-               NO REGISTERED UNITS
-          ================================================== -->
-
+          <!--NO REGISTERED UNITS-->
           <tr>
-
             <td
               colspan="6"
               class="empty-state"
             >
-
               <i class="fa-solid fa-box-open"></i>
-
               <h4>
                 No Registered Units
               </h4>
-
               <p>
                 Start by registering your first equipment asset.
               </p>
-
               <a
-                href="{{ url_for(
-                  'inventory.unit_register'
-                ) }}"
+                href="{{ url_for('inventory.unit_register') }}"
                 class="btn-primary"
               >
-
                 Register Unit
-
               </a>
-
             </td>
-
           </tr>
-
-
         {% endif %}
-
       </tbody>
-
     </table>
-
   </div>
-
-
-  <!-- ==================================================
-       TABLE FOOTER
-  ================================================== -->
-
+  <!--TABLE FOOTER-->
   <div class="table-footer">
-
     <span id="unitCount">
-
       Showing
       {{ inventory_data.units|length
          if inventory_data.units
          else 0 }}
       registered units
-
     </span>
-
   </div>
-
 </section>
-<!-- ==================================
-     DELETE UNIT CONFIRMATION MODAL
-================================== -->
-
+<!--DELETE UNIT CONFIRMATION MODAL-->
 <div
   id="deleteUnitModal"
   class="delete-modal"
   aria-hidden="true"
 >
-
   <div class="delete-modal-overlay"></div>
-
   <div
     class="delete-modal-card"
     role="dialog"
     aria-modal="true"
     aria-labelledby="deleteUnitModalTitle"
   >
-
-    <!-- ICON -->
-
+    <!--ICON-->
     <div class="delete-modal-icon">
-
       <i class="fa-solid fa-trash"></i>
-
     </div>
-
-
-    <!-- CONTENT -->
-
+    <!--CONTENT-->
     <h3 id="deleteUnitModalTitle">
-
       Delete Unit?
-
     </h3>
-
-
     <p>
-
       Are you sure you want to delete
-
       <strong id="deleteUnitName">
-
         this unit
-
       </strong>?
-
     </p>
-
-
     <p class="delete-modal-warning">
-
       This action cannot be undone.
-
     </p>
-
-
-    <!-- ACTIONS -->
-
+    <!--ACTIONS-->
     <div class="delete-modal-actions">
-
       <button
         type="button"
         id="cancelDeleteUnit"
         class="btn-primary"
       >
-
         Cancel
-
       </button>
-
-
       <button
         type="button"
         id="confirmDeleteUnit"
         class="btn-danger"
       >
-
         <i class="fa-solid fa-trash"></i>
-
         <span class="delete-button-text">
-
           Delete Unit
-
         </span>
-
       </button>
-
     </div>
-
   </div>
-
 </div>
-
 {% endblock %}
-
 {% block javascript %}
-
 <script
-  src="{{ url_for(
-    'static',
-    filename='js/units_inventory.js'
-  ) }}"
-></script>
-
-
-
+  src="{{ url_for('static',filename='js/units_inventory.js') }}"></script>
 {% endblock %}
