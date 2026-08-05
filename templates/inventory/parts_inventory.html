@@ -1,51 +1,38 @@
 {% extends "base.html" %} {% block title %} Parts Inventory | YPTSC IMS {%
 endblock %} {% block css %}
-
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/inventory.css') }}"
 />
-
 {% endblock %} {% block content %}
-
 <section class="page-header">
   <div class="page-header-content">
     <h2>{{ inventory_data.title }}</h2>
-
     <p>
       Manage spare parts, consumables, and office supplies inventory records.
     </p>
   </div>
-
   <div class="page-header-actions">
     <a href="{{ url_for('inventory.part_register') }}" class="btn-primary">
       <i class="fa-solid fa-plus"></i>
-
       Register Part
     </a>
-
     <button type="button" class="btn-secondary">
       <i class="fa-solid fa-file-import"></i>
-
       Import Excel
     </button>
-
     <button type="button" class="btn-secondary">
       <i class="fa-solid fa-file-export"></i>
-
       Export Excel
     </button>
   </div>
 </section>
-
 <section class="content-card">
   <div class="table-header">
     <div>
       <h3>Parts Inventory</h3>
-
       <span> Complete records of spare parts and consumable items. </span>
     </div>
-
     <div class="table-tools">
       <input
         type="search"
@@ -53,99 +40,65 @@ endblock %} {% block css %}
         id="partSearch"
         placeholder="Search part code, number, description..."
       />
-
       <select class="filter-select" id="categoryFilter">
         <option value="">All Categories</option>
-
         <option value="Spare Parts">Spare Parts</option>
-
         <option value="Consumables">Consumables</option>
-
         <option value="Office Supplies">Office Supplies</option>
       </select>
-
       <select class="filter-select" id="statusFilter">
         <option value="">All Status</option>
-
         <option value="Available">Available</option>
-
         <option value="Low Stock">Low Stock</option>
-
         <option value="Out of Stock">Out of Stock</option>
       </select>
     </div>
   </div>
-
   <div class="table-container">
     <table class="data-table">
       <thead>
         <tr>
           <th>Part Code</th>
-
           <th>Category</th>
-
           <th>Part Number</th>
-
           <th>Description</th>
-
           <th>Brand</th>
-
           <th>Stock</th>
-
           <th>Minimum</th>
-
           <th>Location</th>
-
           <th>Status</th>
-
           <th>Actions</th>
         </tr>
       </thead>
-
       <tbody id="partsTable">
         {% if inventory_data.parts %} {% for part in inventory_data.parts %}
-
         <tr>
           <td>
             <strong> {{ part.part_code }} </strong>
           </td>
-
           <td>{{ part.category }}</td>
-
           <td>{{ part.part_number }}</td>
-
           <td>
             {{ part.description }} {% if part.compatible_model %}
-
             <br />
-
             <small> Compatible: {{ part.compatible_model }} </small>
-
             {% endif %}
           </td>
-
           <td>{{ part.brand or "-" }}</td>
-
           <td>{{ part.stock }}</td>
-
           <td>{{ part.minimum_stock or 0 }}</td>
-
           <td>{{ part.location or "-" }}</td>
-
           <td>
             <span class="status-badge"> {{ part.status }} </span>
           </td>
-
           <td>
             <div class="action-buttons">
               <a href="#" class="btn-icon" title="View Part">
                 <i class="fa-solid fa-eye"></i>
               </a>
-
               <a href="#" class="btn-icon" title="Edit Part">
                 <i class="fa-solid fa-pen"></i>
               </a>
-
         <form
   method="POST"
   action="{{ url_for(
@@ -157,30 +110,22 @@ endblock %} {% block css %}
     'Delete this part?'
   );"
 >
-
   <button
     type="submit"
     class="btn-icon danger"
     title="Delete Part"
   >
-
     <i class="fa-solid fa-trash"></i>
-
   </button>
             </div>
           </td>
         </tr>
-
         {% endfor %} {% else %}
-
         <tr>
           <td colspan="10" class="empty-state">
             <i class="fa-solid fa-box-open"></i>
-
             <h4>No Parts Registered</h4>
-
             <p>Start adding inventory parts to begin monitoring stock.</p>
-
             <a
               href="{{ url_for('inventory.part_register') }}"
               class="btn-primary"
@@ -189,30 +134,24 @@ endblock %} {% block css %}
             </a>
           </td>
         </tr>
-
         {% endif %}
       </tbody>
     </table>
   </div>
-
   <div class="table-footer">
     <span>
       Showing {{ inventory_data.parts|length if inventory_data.parts else 0 }}
       registered parts
     </span>
-
     <div class="pagination">
       <button disabled>
         <i class="fa-solid fa-chevron-left"></i>
       </button>
-
       <button class="active">1</button>
-
       <button>
         <i class="fa-solid fa-chevron-right"></i>
       </button>
     </div>
   </div>
 </section>
-
 {% endblock %}
