@@ -1,319 +1,178 @@
 {% extends "base.html" %}
-
-
 {% block title %}
 Edit Unit | YPTSC IMS
 {% endblock %}
-
-
-
 {% block css %}
-
 <link rel="stylesheet"
 href="{{ url_for('static', filename='css/inventory.css') }}">
-
 {% endblock %}
-
-
-
-
 {% block content %}
-
-
 <section class="page-header">
-
 <div class="page-header-content">
-
 <h2>
 Edit Unit
 </h2>
-
 <p>
 Update equipment asset information.
 </p>
-
 </div>
-
 </section>
-
-
-
-
 <form method="POST"
 action="{{ url_for(
 'inventory.update_unit',
 asset_code=unit.asset_code
 ) }}">
-
-
-
-<!-- ==========================================
-     EQUIPMENT INFORMATION
-========================================== -->
-
-
+<!--EQUIPMENT INFORMATION-->
 <section class="form-section">
-
-
 <div class="section-header">
-
 <h3>
 Equipment Information
 </h3>
-
 <span>
 Basic equipment identification details.
 </span>
-
 </div>
-
-
-
 <div class="form-grid">
-
-
 <div class="form-group">
-
 <label>
 Asset Code
 </label>
-
 <input
     type="text"
     value="{{ unit.asset_code }}"
     readonly
 >
-
 </div>
-
-
-
 <div class="form-group">
-
 <label>
 Unit Category
 </label>
-
 <select name="unit_category"
 required>
-
-
 <option value="Printer"
 {% if unit.unit_category=="Printer" %}
 selected
 {% endif %}>
 Printer
 </option>
-
-
 <option value="Copier"
 {% if unit.unit_category=="Copier" %}
 selected
 {% endif %}>
 Copier
 </option>
-
-
 </select>
-
 </div>
-
-
-
-
 <div class="form-group">
-
 <label>
 Brand
 </label>
-
 <input
 type="text"
 name="brand"
 value="{{ unit.brand|default('') }}"
 required>
-
 </div>
-
-
-
-
 <div class="form-group">
-
 <label>
 Model
 </label>
-
 <input
 type="text"
 name="model"
 value="{{ unit.model|default('') }}"
 required>
-
 </div>
-
-
-
-
 <div class="form-group">
-
 <label>
 Serial Number
 </label>
-
 <input
 type="text"
 name="serial_number"
 value="{{ unit.serial_number|default('') }}"
 required>
-
 </div>
-
-
-
-
 <div class="form-group">
-
 <label>
 Ownership Type
 </label>
-
-
 <select name="ownership_type">
-
-
 <option value="Company Owned"
 {% if unit.ownership_type=="Company Owned" %}
 selected
 {% endif %}>
 Company Owned
 </option>
-
-
 <option value="Leased"
 {% if unit.ownership_type=="Leased" %}
 selected
 {% endif %}>
 Leased
 </option>
-
-
 <option value="Client Owned"
 {% if unit.ownership_type=="Client Owned" %}
 selected
 {% endif %}>
 Client Owned
 </option>
-
-
 </select>
-
 </div>
-
-
 </div>
-
 </section>
-
-
-
-
-
-<!-- ==========================================
-     PURCHASE INFORMATION
-========================================== -->
-
-
+<!--PURCHASE INFORMATION-->
 <section class="form-section">
-
-
 <div class="section-header">
-
 <h3>
 Purchase Information
 </h3>
-
 <span>
 Supplier and acquisition details.
 </span>
-
 </div>
-
-
-
 <div class="form-grid">
-
-
 <div class="form-group">
-
 <label>
 Supplier
 </label>
-
 <input
 type="text"
 name="supplier"
 value="{{ unit.supplier|default('') }}">
-
 </div>
-
-
-
 <div class="form-group">
-
 <label>
 Purchase Date
 </label>
-
 <input
 type="date"
 name="purchase_date"
 value="{{ unit.purchase_date|default('') }}">
-
 </div>
-
-
-
 <div class="form-group">
-
 <label>
 Date Delivered
 </label>
-
 <input
 type="date"
 name="date_delivered"
 value="{{ unit.date_delivered|default('') }}">
-
 </div>
-
-
-
 <div class="form-group">
-
 <label>
 Purchase Price
 </label>
-
 <input
 type="number"
 step="0.01"
 name="purchase_price"
 value="{{ unit.purchase_price|default('') }}">
-
 </div>
-
-
 <div class="form-group">
-
 <label>
 Status
 </label>
-
-
 <select name="status">
-
-
 {% for status in [
 "Available",
 "Installed",
@@ -321,98 +180,38 @@ Status
 "Under Repair",
 "Disposal"
 ] %}
-
-
 <option value="{{ status }}"
 {% if unit.status==status %}
 selected
 {% endif %}>
 {{ status }}
 </option>
-
-
 {% endfor %}
-
-
 </select>
-
-
-
 </div>
-
 <div class="form-group">
-
 <label>
 Warranty
 </label>
-
 <input
 type="text"
 name="warranty"
 value="{{ unit.warranty|default('') }}">
-
 </div>
-
-
-
 </div>
-
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </section>
-
-
-
-
-
-
-
-
 <div class="form-actions">
-
-
 <a href="{{ url_for(
-'inventory.units_inventory'
-) }}"
-class="btn-secondary">
-
+'inventory.units_inventory') }}"class="btn-secondary">
 Cancel
-
 </a>
-
-
-
-
 <button
 type="submit"
 class="btn-primary">
-
 <i class="fa-solid fa-save"></i>
-
 Update Unit
-
 </button>
-
-
 </div>
-
-
-
-
 </form>
-
-
 {% endblock %}
