@@ -1,45 +1,33 @@
 {% extends "base.html" %} {% block title %} Register Unit | YPTSC IMS {%
 endblock %} {% block css %}
-
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/inventory.css') }}"
 />
-
 {% endblock %} {% block content %}
-
 <section class="page-header">
   <div class="page-header-content">
     <h2>Register Unit</h2>
-
     <p>Add new printer, copier, or equipment asset into inventory.</p>
   </div>
 </section>
-
 <form method="POST" action="{{ url_for('inventory.register_unit') }}">
   <section class="form-section">
     <div class="section-header">
       <h3>Equipment Information</h3>
-
       <span> Basic equipment identification details. </span>
     </div>
-
     <div class="form-grid">
       <div class="form-group">
         <label> Unit Category </label>
-
         <select name="unit_category" required>
           <option value="">Select Category</option>
-
           <option value="Printer">Printer</option>
-
           <option value="Copier">Copier</option>
         </select>
       </div>
-
       <div class="form-group">
         <label> Brand </label>
-
         <input
           type="text"
           name="brand"
@@ -47,10 +35,8 @@ endblock %} {% block css %}
           required
         />
       </div>
-
       <div class="form-group">
         <label> Model </label>
-
         <input
           type="text"
           name="model"
@@ -58,10 +44,8 @@ endblock %} {% block css %}
           required
         />
       </div>
-
       <div class="form-group">
         <label> Serial Number </label>
-
         <input
           type="text"
           name="serial_number"
@@ -69,58 +53,41 @@ endblock %} {% block css %}
           required
         />
       </div>
-
       <div class="form-group">
         <label> Ownership Type </label>
-
         <select name="ownership_type">
           <option value="">Select Ownership</option>
-
           <option value="Company Owned">Company Owned</option>
-
           <option value="Leased">Leased</option>
-
           <option value="Client Owned">Client Owned</option>
         </select>
       </div>
-
       <div class="form-group">
         <label> Asset Code </label>
-
         <input type="text" value="AUTO GENERATED" disabled />
       </div>
     </div>
   </section>
-
   <section class="form-section">
     <div class="section-header">
       <h3>Purchase Information</h3>
-
       <span> Supplier and acquisition details. </span>
     </div>
-
     <div class="form-grid">
       <div class="form-group">
         <label> Supplier </label>
-
         <input type="text" name="supplier" placeholder="Supplier Name" />
       </div>
-
       <div class="form-group">
         <label> Purchase Date </label>
-
         <input type="date" name="purchase_date" />
       </div>
-
       <div class="form-group">
         <label> Date Delivered </label>
-
         <input type="date" name="date_delivered" />
       </div>
-
       <div class="form-group">
         <label> Purchase Price </label>
-
         <input
           type="number"
           name="purchase_price"
@@ -130,43 +97,28 @@ endblock %} {% block css %}
       </div>
    <div class="form-group">
         <label> Status </label>
-
         <select name="status" required>
           <option value="Available">Available</option>
-
           <option value="Installed">Installed</option>
-
           <option value="Reserved">Reserved</option>
-
           <option value="Under Repair">Under Repair</option>
-
           <option value="Disposal">Disposal</option>
         </select>
       </div>
       <div class="form-group">
         <label> Warranty </label>
-
         <input type="text" name="warranty" placeholder="Example: 3 Years" />
       </div>
-      
     </div>
-
-    
   <div class="form-actions">
     <a href="{{ url_for('inventory.units_inventory') }}" class="btn-secondary">
       Cancel
     </a>
-
     <button type="submit" class="btn-primary">
       <i class="fa-solid fa-save"></i>
-
       Register Unit
     </button>
   </div>
   </section>
-
-  
-
 </form>
-
 {% endblock %}
