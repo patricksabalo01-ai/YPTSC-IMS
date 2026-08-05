@@ -1,27 +1,20 @@
 # Environment variables
 .env
-
 # Python cache
 __pycache__/
 *.py[cod]
-
 # Virtual environment
 venv/
 .venv/
 env/
-
 # Flask cache
 instance/
-
 # IDE settings
 .vscode/
-
 # Generated QR codes
 static/qr_codes/
-
 # Temporary files
 *.log
-
 # Operating system files
 .DS_Store
 Thumbs.db
