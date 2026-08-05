@@ -1,69 +1,48 @@
 {% extends "base.html" %} {% block title %} Unit History | YPTSC IMS {% endblock
 %} {% block css %}
-
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/inventory.css') }}"
 />
-
 {% endblock %} {% block content %}
-
 <section class="page-header">
   <div class="page-header-content">
     <h2>Unit Transaction History</h2>
-
     <p>Lifecycle tracking of equipment asset.</p>
   </div>
 </section>
-
 <section class="content-card">
   <div class="table-container">
     <table class="data-table">
       <thead>
         <tr>
           <th>Date</th>
-
           <th>Transaction</th>
-
           <th>Company</th>
-
           <th>Location</th>
-
           <th>Technician</th>
-
           <th>Remarks</th>
         </tr>
       </thead>
-
       <tbody>
         {% if history %} {% for item in history %}
-
         <tr>
           <td>{{ item.date }}</td>
-
           <td>{{ item.transaction }}</td>
-
           <td>{{ item.company }}</td>
-
           <td>{{ item.location }}</td>
-
           <td>{{ item.technician }}</td>
-
           <td>{{ item.remarks }}</td>
         </tr>
-
         {% endfor %} {% else %}
-
         <tr>
           <td colspan="6" class="empty-state">
             No transaction history available.
           </td>
         </tr>
-
         {% endif %}
       </tbody>
     </table>
   </div>
 </section>
-
 {% endblock %}
