@@ -1,8 +1,6 @@
 {% extends "base.html" %} {% block title %} Dashboard | YPTSC IMS {% endblock %}
 {% block content %}
-<!-- ==================================================
-     DASHBOARD HEADER
-================================================== -->
+<!--DASHBOARD HEADER-->
 <section class="dashboard-header">
   <div class="header-content">
     <h2>Dashboard</h2>
@@ -13,9 +11,7 @@
     <span> System Online </span>
   </div>
 </section>
-<!-- ==================================================
-     EXECUTIVE KPI SUMMARY
-================================================== -->
+<!--EXECUTIVE KPI SUMMARY-->
 <section class="dashboard-cards">
   <div class="dash-card">
     <div class="card-icon">
@@ -58,14 +54,10 @@
     <span> Requires replenishment </span>
   </div>
 </section>
-<!-- ==================================================
-     ANALYTICS & REPORTING
-================================================== -->
+<!--ANALYTICS & REPORTING-->
 <section class="dashboard-analytics">
   <div class="analytics-grid charts-layout">
-    <!-- ===============================
-     MACHINE LIFECYCLE CHART
-================================ -->
+    <!--MACHINE LIFECYCLE CHART-->
     <div class="flow-card chart-card">
       <div class="graph-header">
         <div>
@@ -78,9 +70,7 @@
         <canvas id="inventoryChart"></canvas>
       </div>
     </div>
-    <!-- ===============================
-     PARTS DISTRIBUTION CHART
-================================ -->
+    <!--PARTS DISTRIBUTION CHART-->
     <div class="flow-card chart-card">
       <div class="graph-header">
         <div>
@@ -93,9 +83,7 @@
         <canvas id="stockChart"></canvas>
       </div>
     </div>
-    <!-- ===============================
-     REPAIR TREND CHART
-================================ -->
+    <!--REPAIR TREND CHART-->
     <div class="flow-card chart-card repair-chart-card">
       <div class="graph-header">
         <div>
@@ -110,9 +98,7 @@
     </div>
   </div>
 </section>
-<!-- ==================================================
-     MACHINE LIFECYCLE MONITORING
-================================================== -->
+<!--MACHINE LIFECYCLE MONITORING-->
 <section class="inventory-status">
   <div class="flow-card">
     <div class="graph-header">
@@ -140,14 +126,10 @@
     </div>
   </div>
 </section>
-<!-- ==================================================
-     OPERATION OVERVIEW
-================================================== -->
+<!--OPERATION OVERVIEW-->
 <section class="dashboard-overview">
   <div class="overview-grid">
-    <!-- ===============================
-     MACHINE STATUS SUMMARY
-================================ -->
+    <!--MACHINE STATUS SUMMARY-->
     <div class="flow-card">
       <div class="graph-header">
         <div>
@@ -194,9 +176,7 @@
         </div>
       </div>
     </div>
-    <!-- ===============================
-     INVENTORY ACTIVITY
-================================ -->
+    <!--INVENTORY ACTIVITY-->
     <div class="flow-card">
       <div class="graph-header">
         <div>
@@ -240,9 +220,7 @@
     </div>
   </div>
 </section>
-<!-- ==================================================
-     PARTS INVENTORY SUMMARY
-================================================== -->
+<!--PARTS INVENTORY SUMMARY-->
 <section class="parts-status">
   <div class="flow-card">
     <div class="graph-header">
@@ -269,9 +247,7 @@
     </div>
   </div>
 </section>
-<!-- ==================================================
-     RECENT INVENTORY TRANSACTIONS
-================================================== -->
+<!--RECENT INVENTORY TRANSACTIONS-->
 <section class="recent-transactions">
   <div class="flow-card">
     <div class="graph-header">
@@ -318,77 +294,55 @@
     </div>
   </div>
 </section>
-<!-- ==================================================
-     DASHBOARD DATA FOR CHARTS
-================================================== -->
+<!--DASHBOARD DATA FOR CHARTS-->
 <script>
-
   window.dashboardData = {
-
       available: Number(
           "{{ dashboard_data.available|default(0) }}"
       ),
-
       installed: Number(
           "{{ dashboard_data.installed|default(0) }}"
       ),
-
       reserved: Number(
           "{{ dashboard_data.reserved|default(0) }}"
       ),
-
       pulled_out: Number(
           "{{ dashboard_data.pulled_out|default(0) }}"
       ),
-
       repair: Number(
           "{{ dashboard_data.repair|default(0) }}"
       ),
-
       disposal: Number(
           "{{ dashboard_data.disposal|default(0) }}"
       ),
-
       spare_parts: Number(
           "{{ dashboard_data.spare_parts|default(0) }}"
       ),
-
       consumables: Number(
           "{{ dashboard_data.consumables|default(0) }}"
       ),
-
       toner: Number(
           "{{ dashboard_data.toner|default(0) }}"
       ),
-
       ink: Number(
           "{{ dashboard_data.ink|default(0) }}"
       ),
-
       office_supplies: Number(
           "{{ dashboard_data.office_supplies|default(0) }}"
       ),
-
       repair_chart: {{
           dashboard_data.repair_chart
           | default([], true)
           | tojson
       }}
-
   };
-
   console.log(
       "YPTSC Dashboard Data Loaded:",
       window.dashboardData
   );
 </script>
 {% endblock %}
-<!-- ==================================================
-     DASHBOARD JAVASCRIPT
-================================================== -->
+<!--DASHBOARD JAVASCRIPT-->
 {% block javascript %}
-<script src="{{ url_for(
-    'static',
-    filename='js/dashboard.js'
-) }}"></script>
+<script src="{{ url_for('static',filename='js/dashboard.js') }}"></script>
 {% endblock %}
