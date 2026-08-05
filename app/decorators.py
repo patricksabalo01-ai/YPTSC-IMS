@@ -1,113 +1,55 @@
 from functools import wraps
-
 from flask import (
     session,
     redirect,
     url_for,
     request,
-    flash
-)
-
-
-# ==================================
+    flash)
 # LOGIN REQUIRED
-# ==================================
-
 def login_required(function):
-
     @wraps(function)
     def wrapper(
         *args,
-        **kwargs
-    ):
-
+        **kwargs):
         if "user_id" not in session:
-
             flash(
                 "Please log in first.",
-                "warning"
-            )
-
+                "warning")
             return redirect(
-
                 url_for(
                     "auth.login",
-                    next=request.url
-                )
-
-            )
-
-
+                    next=request.url))
         return function(
             *args,
-            **kwargs
-        )
-
-
+            **kwargs)
     return wrapper
-
-# ==================================
 # ROLE REQUIRED
-# ==================================
-
 def role_required(
-    *allowed_roles
-):
-
+    *allowed_roles):
     def decorator(
-        function
-    ):
-
+        function):
         @wraps(function)
         def wrapper(
             *args,
-            **kwargs
-        ):
-
+            **kwargs):
             if "user_id" not in session:
-
                 flash(
                     "Please log in first.",
-                    "warning"
-                )
-
+                    "warning")
                 return redirect(
-
                     url_for(
-                        "auth.login"
-                    )
-
-                )
-
-
+                        "auth.login"))
             current_role = session.get(
-                "role"
-            )
-
-
+                "role")
             if current_role not in allowed_roles:
-
                 flash(
                     "You do not have permission to access this page.",
-                    "danger"
-                )
-
+                    "danger")
                 return redirect(
-
                     url_for(
-                        "dashboard.dashboard"
-                    )
-
-                )
-
-
+                        "dashboard.dashboard"))
             return function(
                 *args,
-                **kwargs
-            )
-
-
+                **kwargs)
         return wrapper
-
-
     return decorator
