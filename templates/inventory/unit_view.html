@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% block title %} View Unit | YPTSC IMS {% endblock %}
 {% block css %}
-
 <link
   rel="stylesheet"
   href="{{ url_for(
@@ -8,30 +7,22 @@
 filename='css/inventory.css'
 ) }}"
 />
-
 {% endblock %} {% block content %}
-
 <section class="page-header">
   <div class="page-header-content">
     <h2>Unit Details</h2>
-
     <p>Complete information of registered equipment asset.</p>
   </div>
 </section>
-
 <section class="content-card">
   <div class="form-grid">
     <div class="form-group">
       <label> Asset Code </label>
-
       <input value="{{ unit.asset_code|default('') }}" disabled />
     </div>
-
     <div class="form-group">
       <label> QR Code </label>
-
       {% if unit.qr_code %}
-
       <img
         src="{{ url_for(
 'static',
@@ -39,87 +30,59 @@ filename=unit.qr_code
 ) }}"
         class="qr-preview"
       />
-
       {% else %}
-
       <span> No QR Available </span>
-
       {% endif %}
     </div>
-
     <div class="form-group">
       <label> Category </label>
-
       <input value="{{ unit.unit_category|default('-') }}" disabled />
     </div>
-
     <div class="form-group">
       <label> Brand </label>
-
       <input value="{{ unit.brand|default('-') }}" disabled />
     </div>
-
     <div class="form-group">
       <label> Model </label>
-
       <input value="{{ unit.model|default('-') }}" disabled />
     </div>
-
     <div class="form-group">
       <label> Serial Number </label>
-
       <input value="{{ unit.serial_number|default('-') }}" disabled />
     </div>
-
     <div class="form-group">
       <label> Ownership </label>
-
       <input value="{{ unit.ownership_type|default('-') }}" disabled />
     </div>
-
     <div class="form-group">
       <label> Status </label>
-
       <input value="{{ unit.status|default('-') }}" disabled />
     </div>
-
     <div class="form-group">
       <label> Company </label>
-
       <input value="{{ unit.company_name|default('-') }}" disabled />
     </div>
-
     <div class="form-group">
       <label> Department </label>
-
       <input value="{{ unit.department|default('-') }}" disabled />
     </div>
-
     <div class="form-group">
       <label> Location </label>
-
       <input value="{{ unit.location|default('-') }}" disabled />
     </div>
-
     <div class="form-group">
       <label> Technician </label>
-
       <input value="{{ unit.technician|default('-') }}" disabled />
     </div>
-
     <div class="form-group">
       <label> Black Meter </label>
-
       <input value="{{ unit.black_meter|default(0) }}" disabled />
     </div>
-
     <div class="form-group">
       <label> Color Meter </label>
-
       <input value="{{ unit.color_meter|default(0) }}" disabled />
     </div>
   </div>
-
   <div class="form-actions">
     <a
       href="{{ url_for(
@@ -129,7 +92,6 @@ filename=unit.qr_code
     >
       Back
     </a>
-
     <a
       href="{{ url_for(
 'inventory.edit_unit',
@@ -143,5 +105,4 @@ asset_code=unit.asset_code
     </a>
   </div>
 </section>
-
 {% endblock %}
