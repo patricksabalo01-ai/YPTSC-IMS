@@ -1,17 +1,10 @@
-/* ==================================================
-   YPTSC IMS
-   THEME CONTROLLER
-   ENTERPRISE DARK / LIGHT MODE
-================================================== */
 document.addEventListener(
     "DOMContentLoaded",
     function () {
         initializeTheme();
     }
 );
-/* ==================================================
-   INITIALIZE THEME
-================================================== */
+/*INITIALIZE THEME*/
 function initializeTheme() {
     const themeToggle =
         document.getElementById(
@@ -64,9 +57,7 @@ function initializeTheme() {
         }
     );
 }
-/* ==================================================
-   APPLY THEME
-================================================== */
+/*APPLY THEME*/
 function applyTheme(
     theme,
     icon
