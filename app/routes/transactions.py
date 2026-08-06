@@ -1,9 +1,6 @@
 from flask import Blueprint, render_template
 from app.decorators import login_required
-
 transactions_bp = Blueprint("transactions", __name__)
-
-
 @transactions_bp.route("/transactions/purchase")
 @login_required
 def purchase():
@@ -11,8 +8,6 @@ def purchase():
     return render_template(
         "transactions/purchase.html", transaction_data=transaction_data
     )
-
-
 @transactions_bp.route("/transactions")
 @login_required
 def transactions():
@@ -20,8 +15,6 @@ def transactions():
     return render_template(
         "transactions/stock_transactions.html", transaction_data=transaction_data
     )
-
-
 @transactions_bp.route("/transactions/delivery")
 @login_required
 def delivery():
@@ -29,8 +22,6 @@ def delivery():
     return render_template(
         "transactions/delivery.html", transaction_data=transaction_data
     )
-
-
 @transactions_bp.route("/transactions/repair")
 @login_required
 def repair_center():
@@ -38,8 +29,6 @@ def repair_center():
     return render_template(
         "transactions/repair_center.html", transaction_data=transaction_data
     )
-
-
 @transactions_bp.route("/transactions/contracts")
 @login_required
 def contracts():
